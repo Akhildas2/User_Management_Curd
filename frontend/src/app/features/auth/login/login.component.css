@@ -193,8 +193,9 @@ mat-icon img {
 }
 
 button[disabled] {
-    background-color: #ffffff !important;
-    color: #000;
+    opacity: 0.6;
+    cursor: not-allowed;
+    box-shadow: none;
 }
 
 /* For mobile devices */

@@ -17,6 +17,6 @@ export class NotificationService {
             panelClass: [`${type}-snackbar`] // This applies the custom class
         };
 
-        this.snackBar.open(message, 'Close', config); 
+        this.snackBar.open(message, 'Close', config);
     }
 }

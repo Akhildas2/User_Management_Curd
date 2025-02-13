@@ -1,0 +1,139 @@
+<app-header></app-header>
+
+<div class="settings-container">
+  <mat-card class="settings-card">
+    <mat-tab-group fitInkBarToContent mat-stretch-tabs="false" mat-align-tabs="start">
+      <!-- Change Password -->
+      <mat-tab label="Change Password">
+        <div class="tab-content">
+          <h3 class="title">Update Your Password</h3>
+          <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+
+            <!-- Current Password -->
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Current Password</mat-label>
+              <input matInput [type]="hideCurrent() ? 'password' : 'text'" formControlName="currentPassword">
+              <button mat-icon-button matSuffix aria-label="Toggle password visibility"
+                (click)="toggleVisibility('current', $event)">
+                <mat-icon>{{ hideCurrent() ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+              <mat-error *ngIf="changePasswordForm.get('currentPassword')?.hasError('required')">
+                Current password is required.
+              </mat-error>
+            </mat-form-field>
+
+            <!-- New Password -->
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>New Password</mat-label>
+              <input matInput [type]="hideNew() ? 'password' : 'text'" formControlName="newPassword">
+              <button mat-icon-button matSuffix aria-label="Toggle password visibility"
+                (click)="toggleVisibility('new', $event)">
+                <mat-icon>{{ hideNew() ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+              <mat-error *ngIf="changePasswordForm.get('newPassword')?.hasError('required'); else minlengthError">
+                New password is required.
+              </mat-error>
+              <ng-template #minlengthError>
+                <mat-error *ngIf="changePasswordForm.get('newPassword')?.hasError('minlength')">
+                  New password must be at least 8 characters.
+                </mat-error>
+              </ng-template>
+            </mat-form-field>
+
+            <!-- Confirm New Password -->
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Confirm New Password</mat-label>
+              <input matInput [type]="hideConfirm() ? 'password' : 'text'" formControlName="confirmPassword">
+              <button mat-icon-button matSuffix aria-label="Toggle password visibility"
+                (click)="toggleVisibility('confirm', $event)">
+                <mat-icon>{{ hideConfirm() ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+              <mat-error *ngIf="changePasswordForm.get('confirmPassword')?.hasError('required')">
+                Confirm password is required.
+              </mat-error>
+              <mat-error *ngIf="changePasswordForm.get('confirmPassword')?.hasError('passwordMismatch')">
+                Passwords do not match.
+              </mat-error>
+
+
+            </mat-form-field>
+
+
+
+            <button mat-raised-button color="primary" [disabled]="changePasswordForm.invalid">
+              Update Password
+            </button>
+          </form>
+        </div>
+      </mat-tab>
+
+
+      <!-- Change Theme -->
+      <mat-tab label="Change Theme">
+        <div class="tab-content">
+          <h3 class="title">Select Theme</h3>
+
+          <mat-radio-group [value]="theme()" (change)="changeTheme($event.value)" aria-label="Select Theme">
+            <mat-radio-button value="light">Light Mode</mat-radio-button>
+            <mat-radio-button value="dark">Dark Mode</mat-radio-button>
+          </mat-radio-group>
+
+          <button mat-button class="buttons" (click)="changeTheme(theme())">Save Theme</button>
+        </div>
+      </mat-tab>
+
+
+      <!-- Contact -->
+      <mat-tab label="Contact">
+        <div class="tab-content">
+          <h3 class="title">Contact Support</h3>
+          <p>Email: <a href="mailto:supportSalesforce@gmail.com">supportSalesforce&#64;gmail.com</a></p>
+          <p>Phone: +123-456-7890</p>
+          <p>Near Kondotty,Malappuram</p>
+        </div>
+      </mat-tab>
+
+      <!-- Help Tab with Expansion Panel -->
+      <mat-tab label="Help">
+        <div class="tab-content">
+          <h3 class="title">Help & FAQs</h3>
+          <mat-accordion>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>How to reset my password?</mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>Go to Settings > Change Password and follow the instructions.</p>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>How to update my profile?</mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>Go to the Profile page and update your information.</p>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>How to delete my profile?</mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>Go to the Profile page and delete your information.</p>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>How to upload a profile image?</mat-panel-title>
+              </mat-expansion-panel-header>
+              <p>Go to the Profile page and upload your photo.</p>
+            </mat-expansion-panel>
+
+          </mat-accordion>
+        </div>
+      </mat-tab>
+
+
+    </mat-tab-group>
+  </mat-card>
+</div>
+
+<app-footer></app-footer>

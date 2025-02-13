@@ -56,6 +56,11 @@ button {
 button:hover,
 .selected-menu-item {
     color: #004d63;
+    font-weight: bold;
+}
+
+.activated {
+    color: #004d63 !important;
 }
 
 .right-section {
@@ -140,7 +145,6 @@ mat-toolbar {
         margin-left: 10px;
         gap: 5px;
     }
-
 
 }
 

@@ -22,6 +22,7 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatNativeDateModule } from "@angular/material/core";
 import { MatSortModule } from "@angular/material/sort";
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
     imports: [
@@ -47,7 +48,8 @@ import { MatSortModule } from "@angular/material/sort";
         MatPaginatorModule,
         MatTooltipModule,
         MatNativeDateModule,
-        MatSortModule
+        MatSortModule,
+        MatTabsModule
     ],
     exports: [
         MatCardModule,
@@ -72,7 +74,8 @@ import { MatSortModule } from "@angular/material/sort";
         MatPaginatorModule,
         MatTooltipModule,
         MatNativeDateModule,
-        MatSortModule
+        MatSortModule,
+        MatTabsModule
     ]
 })
 export class MaterialModule { }

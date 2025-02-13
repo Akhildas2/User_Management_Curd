@@ -47,3 +47,19 @@ body {
 .mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
   stroke: #00adbd !important;
 }
+
+
+body.light {
+  background-color: white;
+  color: black;
+}
+
+body.dark {
+  background-color: #121212;
+  color: white;
+}
+
+/* Ensure Angular Material components adapt */
+body.dark .mat-radio-button {
+  color: white;
+}

@@ -1,1 +1,32 @@
-<p>footer works!</p>
+<footer class="app-footer">
+    <div class="footer-content">
+        <div class="contact-info">
+            <p>Contact Us: <a href="mailto:supportSalesforce@gmail.com">supportSalesforce&#64;gmail.com</a></p>
+            <p>Phone: +123-456-7890</p>
+            <p>Near Kondotty,Malappuram </p>
+        </div>
+        <div class="footer-nav" *ngIf="isAdmin">
+            <a href="/admin/dashboard">Dashboard</a>
+            <a href="/admin/profile">User Profile</a>
+            <a href="/admin/users-management">User Management</a>
+            <a href="/admin/settings">Settings</a>
+        </div>
+        <div class="footer-nav" *ngIf="!isAdmin">
+            <a href="/user/home">Home</a>
+            <a href="/user/profile">User Profile</a>
+            <a href="/user/settings">Settings</a>
+        </div>
+        <div class="legal-info">
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/terms-of-service">Terms of Service</a>
+        </div>
+        <div class="social-media">
+            <a href="https://facebook.com/yourapp" target="_blank">Facebook</a>
+            <a href="https://twitter.com/yourapp" target="_blank">Twitter</a>
+            <a href="https://linkedin.com/company/yourapp" target="_blank">LinkedIn</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Salesforce. All rights reserved.</p>
+    </div>
+</footer>

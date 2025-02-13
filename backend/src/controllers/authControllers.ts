@@ -20,7 +20,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
             res.status(403).json({ status: 'error', message: 'Your account is blocked. Contact support.' });
             return;
         }
-        
+
         // Store refresh token in HTTP-only cookie
         res.cookie("refreshToken", result.refreshToken, {
             httpOnly: true,

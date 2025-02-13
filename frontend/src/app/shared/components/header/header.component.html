@@ -8,31 +8,12 @@
     <div class="center-buttons">
         <ng-container *ngFor="let item of (isAdmin ? adminMenuItems() : userMenuItems())">
             <button mat-button [routerLink]="item.route" aria-label="{ item.label } Section"
-                routerLinkActive="selected-menu-item" #rla="routerLinkActive" [class.activated]="rla.isActive">
-                <mat-icon [fontSet]="rla.isActive ? 'material-icons' : 'material-icons-outlined'">
-                    {{ item.icon }}
-                </mat-icon>
+                [routerLinkActive]="'activated selected-menu-item'" [routerLinkActiveOptions]="{ exact: true }">
+                <mat-icon [fontSet]="'material-icons-outlined'">{{ item.icon }}</mat-icon>
                 <span>{{ item.label }}</span>
             </button>
-
-            <!-- Settings Dropdown for Admin -->
-            <mat-menu #settingsMenu="matMenu" *ngIf="item.label === 'Settings' && isAdmin">
-                <button mat-menu-item *ngFor="let subItem of settingsMenuItems()" [routerLink]="subItem.route">
-                    <mat-icon>{{ subItem.icon }}</mat-icon>
-                    <span>{{ subItem.label }}</span>
-                </button>
-            </mat-menu>
-
-            <!-- Settings Dropdown for User -->
-            <mat-menu #userSettingsMenu="matMenu" *ngIf="item.label === 'Settings' && !isAdmin">
-                <button mat-menu-item *ngFor="let subItem of userSettingsMenuItems()" [routerLink]="subItem.route">
-                    <mat-icon>{{ subItem.icon }}</mat-icon>
-                    <span>{{ subItem.label }}</span>
-                </button>
-            </mat-menu>
         </ng-container>
     </div>
-
 
     <!-- Search Input -->
     <div class="search-container">
@@ -68,6 +49,7 @@
             </button>
         </mat-menu>
     </div>
+
     <!-- Mobile Menu Toggle Button -->
     <button mat-icon-button aria-label="Menu" class="mobile-menu-toggle" (click)="toggleSidenav()">
         <mat-icon>menu</mat-icon>

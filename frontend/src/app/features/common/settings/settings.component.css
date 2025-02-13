@@ -1,0 +1,100 @@
+app-header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+/* Container */
+.settings-container {
+  width: 100%;
+  height: calc(100vh - 80px);
+  display: flex;
+  padding: 40px;
+}
+
+/* Settings Card */
+.settings-card {
+  width: 100%;
+  background: white;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  z-index: 0;
+}
+
+/* Tabs Content */
+.tab-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+/* Form Fields */
+mat-form-field {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Buttons */
+.buttons {
+  color: #00adbd;
+  border: 1px solid #00adbd;
+  border-radius: 25px;
+  width: 200px;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Button Hover Effect */
+.buttons:hover {
+  color: #004d63;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centers the button */
+  width: 100%;
+}
+
+.mat-mdc-tab-group,
+.mat-mdc-tab-nav-bar {
+  --mat-tab-header-active-focus-label-text-color: #004d63;
+  --mat-tab-header-active-label-text-color: #004d63;
+  --mat-tab-header-inactive-label-text-color: #00adbd;
+  --mat-tab-header-inactive-focus-label-text-color: #00adbd;
+  --mat-tab-header-inactive-hover-label-text-color: #004d63;
+  --mdc-tab-indicator-active-indicator-color: #004d63;
+  --mat-tab-header-active-hover-label-text-color: #004d63;
+
+  --mat-tab-header-active-focus-indicator-color: #004d63;
+  --mat-tab-header-active-focus-ripple-color: transparent;
+}
+
+/* Force the active tab label color to always show */
+.mat-mdc-tab-header {
+  .mdc-tab--active .mdc-tab__text-label {
+    color: #004d63 !important;
+  }
+
+  /* Remove unwanted focus outline */
+  .mat-mdc-tab:focus .mdc-tab__text-label {
+    color: #004d63 !important;
+  }
+}
+
+/* Ensure ink bar (underline) updates immediately */
+.mat-mdc-tab-group .mdc-tab-indicator--active .mdc-tab-indicator__content {
+  transition: none !important;
+}

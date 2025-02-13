@@ -117,6 +117,14 @@ button.mat-icon-button:hover {
     padding: 10px 15px;
 }
 
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 80px);
+    background-color: #f5f5f5;
+}
+
 /* Responsive Adjustments */
 @media screen and (max-width: 1024px) {
     .user-list-container {

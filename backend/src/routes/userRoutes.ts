@@ -14,6 +14,7 @@ router.get('/user/:id', userControllers.getUsers); // Get user by ID
 router.put('/user', jsonParser, userControllers.updateUser); // Update user
 router.delete('/user/:id', userControllers.deleteUser); // Delete user
 router.post('/user/upload-photo', upload.single('profileImage'), userControllers.photoUpload); // Upload photo
+router.post('/user/:id/changePassword', userControllers.changePassword); // Change password
 
 // Common routes
 router.post('/register', jsonParser, authControllers.register); // Register

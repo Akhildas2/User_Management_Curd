@@ -13,11 +13,12 @@ import { Router } from '@angular/router';
 import { minimumAgeValidator } from '../../../shared/validators/dob.validator';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { FooterComponent } from '../../../shared/components/footer/footer.component';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [HeaderComponent, MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, MatNativeDateModule],
+  imports: [HeaderComponent, FooterComponent, MaterialModule, CommonModule, FormsModule, ReactiveFormsModule, MatNativeDateModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
 })
@@ -43,7 +44,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     { position: 'QA Tester', icon: 'check_circle' }
   ];
 
-  constructor(private store: Store, private fb: FormBuilder, private router: Router, private dialog: MatDialog,private dateAdapter: DateAdapter<Date>,) {
+  constructor(private store: Store, private fb: FormBuilder, private router: Router, private dialog: MatDialog, private dateAdapter: DateAdapter<Date>,) {
     this.dateAdapter.setLocale('en-GB');
     this.user$ = this.store.select(selectUserProfile);
     this.isLoading$ = this.store.select(selectUserLoading);

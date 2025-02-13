@@ -3,6 +3,7 @@ import { HeaderComponent } from '../../../shared/components/header/header.compon
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../../Material.Module';
 import { RouterLink } from '@angular/router';
+import { FooterComponent } from '../../../shared/components/footer/footer.component';
 
 export interface Card {
   icon: string,
@@ -14,13 +15,12 @@ export interface Card {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent, CommonModule, MaterialModule, RouterLink],
+  imports: [HeaderComponent, CommonModule, MaterialModule, RouterLink, FooterComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
   cards: Card[] = [
-    { icon: 'task', title: 'Tasks', content: 'Manage your tasks here.', route: '/user/task' },
     { icon: 'person', title: 'Profile', content: 'View and update your profile.', route: '/user/profile' },
     { icon: 'settings', title: 'Settings', content: 'Adjust your preferences here.', route: '/user/settings' }
   ];

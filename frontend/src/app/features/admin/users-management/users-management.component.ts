@@ -1,30 +1,31 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { SearchService } from '../../../shared/services/search.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AdminService } from '../../../core/services/admin/admin.service';
+import { NotificationService } from '../../../shared/services/notification.service';
+import { IUser } from '../../../shared/models/userModel';
+import { selectAdminError, selectAdminLoading, selectAllUsers } from '../../../store/selectors/admin.selectors';
+import * as AdminActions from '../../../store/actions/admin.actions';
+import { UserDialogComponent } from '../../../shared/components/user-dialog/user-dialog.component';
+import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { MaterialModule } from '../../../../Material.Module';
 import { CommonModule } from '@angular/common';
-import { IUser } from '../../../shared/models/userModel';
-import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
-import * as AdminActions from '../../../store/actions/admin.actions';
-import { selectAdminError, selectAdminLoading, selectAllUsers } from '../../../store/selectors/admin.selectors';
-import { SearchService } from '../../../shared/services/search.service';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog } from '@angular/material/dialog';
-import { UserDialogComponent } from '../../../shared/components/user-dialog/user-dialog.component';
-import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
-import { MatSort } from '@angular/material/sort';
-import { AdminService } from '../../../core/services/admin/admin.service';
-import { NotificationService } from '../../../shared/services/notification.service';
+import { FooterComponent } from '../../../shared/components/footer/footer.component';
 
 @Component({
-  selector: 'app-users-list',
+  selector: 'app-users-management',
   standalone: true,
-  imports: [HeaderComponent, MaterialModule, CommonModule],
-  templateUrl: './users-list.component.html',
-  styleUrl: './users-list.component.css'
+  imports: [HeaderComponent, FooterComponent, MaterialModule, CommonModule],
+  templateUrl: './users-management.component.html',
+  styleUrl: './users-management.component.css'
 })
-export class UsersListComponent implements OnInit {
+export class UsersManagementComponent implements OnInit {
   displayedColumns: string[] = ['profileImage', 'name', 'email', 'phone', 'blockedStatus', 'actions'];
   dataSource = new MatTableDataSource<IUser>([]);
   isLoading$!: Observable<boolean>;
@@ -143,25 +144,38 @@ export class UsersListComponent implements OnInit {
 
   toggleBlockUser(user: IUser, event: Event): void {
     event.stopPropagation();
+    const action = user.isBlocked ? 'unblock' : 'block';
 
-    if (!user._id) {
-      this.notificationService.showNotification('User session expired. Please login again.');
-      return;
-    }
-
-    this.adminService.toggleBlockUser(user._id).subscribe(
-      (response: any) => {
-        const updatedUser = { ...user, isBlocked: response.isBlocked };
-
-        this.dataSource.data = this.dataSource.data.map(u =>
-          u._id === updatedUser._id ? updatedUser : u
-        );
-        this.notificationService.showNotification(response.message)
-      },
-      () => {
-        this.notificationService.showNotification('Failed to update user status');
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        icon: 'warning',
+        title: `Confirm ${action.charAt(0).toUpperCase() + action.slice(1)}`,
+        message: `Are you sure you want to ${action} ${user.name}'s account?`
       }
-    );
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (!user._id) {
+          this.notificationService.showNotification('User session expired. Please login again.');
+          return;
+        }
+        this.adminService.toggleBlockUser(user._id).subscribe(
+          (response: any) => {
+            const updatedUser = { ...user, isBlocked: response.isBlocked };
+
+            this.dataSource.data = this.dataSource.data.map(u =>
+              u._id === updatedUser._id ? updatedUser : u
+            );
+            const status = updatedUser.isBlocked ? 'blocked' : 'unblocked';
+            this.notificationService.showNotification(`User successfully ${status}.`, 'success');
+          },
+          () => {
+            this.notificationService.showNotification('Failed to update user status');
+          }
+        );
+      }
+    })
   }
 
 
@@ -191,6 +205,5 @@ export class UsersListComponent implements OnInit {
       }
     );
   }
-
 
 }

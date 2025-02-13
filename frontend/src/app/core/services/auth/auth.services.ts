@@ -55,7 +55,7 @@ export class AuthServices {
 
   // Retrieve id from localStorage
   getUserId(): string | null {
-     return localStorage.getItem('userId');
+    return localStorage.getItem('userId');
   }
 
   // Logout method

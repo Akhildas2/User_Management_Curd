@@ -28,4 +28,8 @@ export class UserService {
     return this.http.post<IUser>(`${this.baseUrl}/upload-photo`, formData);
   }
 
+  changePassword(id: string, currentPassword: string, newPassword: string): Observable<any> {
+    return this.http.post<IUser>(`${this.baseUrl}/${id}/changePassword`, { password: currentPassword, newPassword });
+  }
+
 }

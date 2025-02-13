@@ -4,14 +4,73 @@ app-header {
   align-items: center;
 }
 
-/* Profile Container */
 .profile-container {
-  max-width: 1000px;
-  margin: 40px auto;
+  max-width: 100%;
+  padding: 20px;
+}
+
+.profile-header {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #004d63;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.upload-photo-container {
+  margin-top: 8px;
+}
+
+.upload-photo-btn {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #00adbd;
+  border: 1px solid #00adbd;
+  border-radius: 25px;
+  cursor: pointer;
+  padding: 8px 16px;
+  transition: color 0.3s;
+}
+
+.upload-photo-btn:hover {
+  color: #004d63;
+}
+
+.file-input {
+  display: none;
+}
+
+.profile-row {
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  justify-content: center;
+}
+
+.user-info,
+.add-details {
+  flex: 1;
+  max-width: 50%;
+  display: flex;
+}
+
+.info-card,
+.info-deatils-card {
+  width: 100%;
   border-radius: 25px;
 }
 
-/* Title */
 .profile-title {
   display: flex;
   align-items: center;
@@ -22,74 +81,16 @@ app-header {
   gap: 10px;
 }
 
-/* Verified Icon */
 .verified-icon {
   color: green;
   font-size: 30px !important;
-  vertical-align: middle;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 32px;
   height: 32px;
-  padding: 2px;
-}
-
-/* Profile Header */
-.profile-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 15px;
-}
-
-.profile-img {
-  width: 200px;
-  height: 200px;
-  object-fit: fill;
-  object-position: center;
-  border-radius: 50%;
-  border: 3px solid #004d63;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
-
-/* Upload Button */
-.upload-photo-container {
-  margin-top: 8px;
-}
-
-.upload-photo-btn {
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  color: #00adbd !important;
-  border: 1px solid #00adbd;
-  border-radius: 25px;
-  cursor: pointer;
-}
-
-.upload-photo-btn:hover {
-  color: #004d63 !important;
-}
-
-.file-input {
-  display: none;
-}
-
-/* User Information */
-.user-info {
-  margin-top: 20px;
-}
-
-.info-card {
-  margin-top: 15px;
-  border-radius: 25px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .personal-info-header {
   display: flex;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
@@ -97,6 +98,7 @@ app-header {
 
 .personal-info-header h2,
 mat-icon {
+  font-size: 1.5rem;
   color: #004d63;
 }
 
@@ -104,42 +106,32 @@ mat-icon {
   margin-bottom: 10px;
 }
 
-.mat-form-field {
-  width: 100%;
-}
-
 .full-width {
   font-weight: bolder;
   width: 100%;
 }
 
-/* update profile Button */
 .update-profile-button-row {
   display: flex;
   justify-content: center;
 }
 
 .update-btn {
-  color: #00adbd !important;
+  color: #00adbd;
   border: 1px solid #00adbd;
   border-radius: 25px;
   width: 50%;
   cursor: pointer;
+  padding: 8px 16px;
+  transition: color 0.3s;
 }
 
 .update-btn:hover {
-  color: #004d63 !important;
-}
-
-/* Add Details Section */
-.add-details {
-  margin-top: 30px;
-  border-radius: 25px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  color: #004d63;
 }
 
 .add-details-title {
-  font-size: 1.5em;
+  font-size: 1.5rem;
   color: #004d63;
 }
 
@@ -148,39 +140,31 @@ mat-panel-description {
   gap: 8px;
 }
 
-.info-deatils-card {
-  margin-top: 15px;
-  border-radius: 25px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
-
-
-/* Add Details Button */
 .add-details-button-row {
   display: flex;
   justify-content: center;
 }
 
 .add-btn {
-  color: #00adbd !important;
+  color: #00adbd;
   border: 1px solid #00adbd;
   border-radius: 25px;
   width: 50%;
   cursor: pointer;
+  padding: 8px 16px;
+  transition: color 0.3s;
 }
 
 .add-btn:hover {
-  color: #004d63 !important;
+  color: #004d63;
 }
 
-/* Gender Container */
 .gender-container {
   margin-top: -10px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 8px;
-  margin-left: 0px;
 }
 
 .gender-label {
@@ -193,38 +177,24 @@ mat-panel-description {
   margin-right: 4px;
 }
 
-/* Delete Account Button */
 .delete-account-btn {
   display: block;
   width: 45%;
   margin: 15px auto;
   text-align: center;
-  color: #00adbd !important;
+  color: #00adbd;
   border: 1px solid #00adbd;
   border-radius: 25px;
   cursor: pointer;
+  padding: 8px 16px;
+  transition: color 0.3s;
 }
 
 .delete-account-btn:hover,
 .delete-account-btn:hover mat-icon {
-  color: red !important;
+  color: red;
 }
 
-/* Photo Upload Container */
-.upload-photo-container {
-  position: relative;
-}
-
-.file-input {
-  display: none;
-}
-
-.upload-photo-btn {
-  position: relative;
-  z-index: 1;
-}
-
-/* Spinner Container */
 .spinner-container {
   display: flex;
   justify-content: center;
@@ -236,49 +206,74 @@ mat-panel-description {
 /* Responsive for Small Devices */
 @media (max-width: 480px) {
   .profile-container {
-    padding: 10px;
+    padding: 20px;
+    width: 100%;
   }
 
+  /* Center Profile Title */
   .profile-title {
-    font-size: 28px;
+    font-size: 24px;
+    text-align: center;
   }
 
-  .upload-photo-btn {
-    z-index: 0;
+  /* Stack profile image and buttons properly */
+  .profile-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
+  /* Ensure profile image fits */
+  .profile-img {
+    width: 150px;
+    height: 150px;
+  }
+
+  /* Upload and Action Buttons */
+  .upload-photo-btn,
   .update-btn,
   .add-btn,
   .delete-account-btn {
     width: 100%;
     margin-top: 10px;
-    z-index: 0;
   }
 
+  /* Stack profile information */
+  .profile-row {
+    flex-direction: column;
+    width: 100%;
+    gap: 25px;
+  }
+
+  /* Adjust Personal Info & Additional Details */
+  .user-info,
   .add-details {
-    margin-top: 10px;
-    padding: 0;
+    width: 100%;
+    max-width: 100%;
   }
 
+  /* Ensure Cards Take Full Width */
+  .info-card,
+  .info-deatils-card {
+    width: 100%;
+    padding: 10px;
+  }
+
+  /* Adjust Section Headers */
   .add-details-title {
     font-size: 1rem;
     text-align: center;
   }
 
-  mat-panel-description {
-    font-size: 0.75rem;
-  }
-
+  /* Improve Gender Selection Layout */
   .gender-container {
     display: flex;
     flex-direction: column;
-    margin-left: 0;
-    margin-right: 0;
+    align-items: center;
   }
 
   .gender-label {
-    display: flex;
-    justify-content: flex-start;
     font-size: 12px;
     font-weight: bold;
   }
@@ -286,13 +281,13 @@ mat-panel-description {
   mat-radio-group {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
-    gap: 0px;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
   }
 
   mat-radio-button {
-    font-size: 10px;
+    font-size: 12px;
     flex: 0 0 auto;
   }
 }

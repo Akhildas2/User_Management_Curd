@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import User from '../config/models/userModels';
+import User from '../config/models/userModel';
 import crypto from 'crypto';
 import { uploadToCloudinary } from '../helpers/uploadToCloudinary';
 import { deleteFromCloudinary } from '../helpers/deleteFromCloudinary';

@@ -36,9 +36,8 @@ export class SidenavComponent implements OnInit {
   // Admin Menu Items
   readonly adminMenuItems = signal<MenuItem[]>([
     { icon: 'dashboard', label: 'Dashboard', route: '/admin/dashboard' },
-    { icon: 'people', label: 'Users List', route: '/admin/users-list' },
+    { icon: 'people', label: 'Users List', route: '/admin/users-management' },
     { icon: 'person', label: 'Profile', route: '/admin/profile' },
-    { icon: 'notifications', label: 'Notifications', route: '/admin/notifications' },
     { icon: 'settings', label: 'Settings', route: '/admin/settings' },
   ]);
 
@@ -46,10 +45,7 @@ export class SidenavComponent implements OnInit {
   readonly userMenuItems = signal<MenuItem[]>([
     { icon: 'home', label: 'Home', route: '/user/home' },
     { icon: 'person', label: 'Profile', route: '/user/profile' },
-    { icon: 'history', label: 'My Activity', route: '/user/my-activity' },
     { icon: 'settings', label: 'Settings', route: '/user/settings' },
-    { icon: 'help', label: 'Help', route: '/user/help' },
-
   ]);
 
   logout(): void {

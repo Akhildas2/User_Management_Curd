@@ -20,7 +20,7 @@ export class AuthEffects {
             this.AuthServices.setAccessToken(accessToken);
             this.AuthServices.setUserId(user._id);
             this.notificationService.showNotification('Login successful! Welcome back.', 'success');
-            
+
             if (user.isAdmin) {
               this.router.navigate(['/admin/dashboard']);
             } else {

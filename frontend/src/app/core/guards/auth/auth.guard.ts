@@ -7,7 +7,7 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
   const router = inject(Router); // Injecting Router for redirection
 
   // Check if the user is logged in
-  if (authService.isLoggedIn()) {    
+  if (authService.isLoggedIn()) {
     return true; // User is authenticated, allow access
   }
 

@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
-import User from '../config/models/userModels';
+import User from '../config/models/userModel';
 import mongoose from 'mongoose';
 import path from 'path';
 import fs from 'fs';
 import cloudinary from '../config/cloudinaryConfig';
 import { uploadToCloudinary } from '../helpers/uploadToCloudinary';
 import { deleteFromCloudinary } from '../helpers/deleteFromCloudinary';
+import { compare } from 'bcrypt';
 
 // For getting the user
 export const getUsers = async (req: Request, res: Response): Promise<void> => {
@@ -136,7 +137,42 @@ export const photoUpload = async (req: Request, res: Response): Promise<void> =>
         res.status(200).json({ status: 'success', message: 'Photo uploaded successfully', user: updatedUser });
 
     } catch (error) {
-        console.error("Error uploading photo:", error);
         res.status(500).json({ status: 'error', msg: 'Failed to upload photo', error });
+    }
+};
+
+
+// For deleting user
+export const changePassword = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { id } = req.params;
+        const { password, newPassword } = req.body;
+
+        // Validate ID format
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            res.status(400).json({ status: 'error', msg: 'Invalid User ID' });
+            return;
+        }
+
+        const user = await User.findById(id);
+
+        if (!user) {
+            res.status(404).json({ status: 'error', msg: 'User not found' });
+            return;
+        }
+
+        // Check if old password is correct
+        if (!await user.comparePassword(password)) {
+            res.status(401).json({ status: 'error', message: 'Invalid login credentials.' });
+            return;
+        }
+
+        user.password = newPassword;
+        await user.save()
+
+        res.status(200).json({ status: 'success', msg: 'Password updated successfully' });
+    } catch (error) {
+        // Handle errors message
+        res.status(500).json({ status: 'error', msg: 'Failed to change password' });
     }
 };

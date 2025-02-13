@@ -1,3 +1,42 @@
 <app-header></app-header>
 
-mat
+<div class="dashboard-container">
+  <mat-card class="dashboard-card">
+    <mat-card-title class="heading">Admin Dashboard</mat-card-title>
+    <mat-card-content>
+      <div class="metrics-section">
+        <mat-grid-list cols="4" rowHeight="200px" gutterSize="8px">
+          <mat-grid-tile *ngFor="let metric of metrics">
+            <mat-card class="metric-card" [style.backgroundColor]="metric.color">
+              <mat-card-content>
+                <div class="metric-content">
+                  <mat-icon class="metric-icon">{{ metric.icon }}</mat-icon>
+                  <h2 class="metric-value">{{ metric.value }}</h2>
+                  <p class="metric-title">{{ metric.title }}</p>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+
+      <div class="quick-actions-section">
+        <h2 class="section-title">Quick Actions</h2>
+        <mat-grid-list cols="3" rowHeight="200px" gutterSize="8px">
+          <mat-grid-tile *ngFor="let action of quickActions">
+            <mat-card class="action-card" (click)="navigateTo(action.route)">
+              <mat-card-content>
+                <div class="action-content">
+                  <mat-icon class="action-icon">{{ action.icon }}</mat-icon>
+                  <h3 class="action-title">{{ action.title }}</h3>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<app-footer></app-footer>

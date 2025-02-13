@@ -1,0 +1,53 @@
+.app-footer {
+    padding: 20px;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-content div {
+    flex: 1;
+}
+
+.footer-nav a,
+.legal-info a,
+.social-media a,
+.quick-actions a {
+    display: block;
+    margin-bottom: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.footer-nav a:hover,
+.legal-info a:hover,
+.social-media a:hover,
+.quick-actions a:hover {
+    text-decoration: underline;
+}
+
+.quick-actions .btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-right: 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.quick-actions .btn:hover {
+    background-color: #0056b3;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #6c757d;
+}
