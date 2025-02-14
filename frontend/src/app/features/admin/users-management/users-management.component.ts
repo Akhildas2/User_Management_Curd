@@ -26,7 +26,7 @@ import { FooterComponent } from '../../../shared/components/footer/footer.compon
   styleUrl: './users-management.component.css'
 })
 export class UsersManagementComponent implements OnInit {
-  displayedColumns: string[] = ['profileImage', 'name', 'email', 'phone', 'blockedStatus', 'actions'];
+  displayedColumns: string[] = ['profileImage', 'name', 'email', 'phone', 'position', 'blockedStatus', 'actions'];
   dataSource = new MatTableDataSource<IUser>([]);
   isLoading$!: Observable<boolean>;
   error$!: Observable<string | null>;

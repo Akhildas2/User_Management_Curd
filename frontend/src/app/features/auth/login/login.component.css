@@ -116,7 +116,7 @@
 }
 
 /* Forgot Password Styling */
-.forgot-password {
+.forgot-password a {
     display: block;
     text-align: center;
     font-weight: bold;
@@ -124,10 +124,13 @@
     font-size: 18px;
     margin: 20px;
     transition: color 0.5s ease;
+    color: #00adbd;
+    text-decoration: none;
 }
 
-.forgot-password:hover {
-    color: #00adbd;
+.forgot-password a:hover {
+    text-decoration: underline;
+    color: #004d63;
 }
 
 /* Add a line divider with "or" text */

@@ -37,6 +37,12 @@
                         <td mat-cell *matCellDef="let user"> {{ user.phone }} </td>
                     </ng-container>
 
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="position">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="hide-on-mobile"> Position </th>
+                        <td mat-cell *matCellDef="let user" class="hide-on-mobile"> {{ user.position }} </td>
+                    </ng-container>
+
                     <!-- Admin Status Column -->
                     <ng-container matColumnDef="blockedStatus">
                         <th mat-header-cell *matHeaderCellDef>Status </th>

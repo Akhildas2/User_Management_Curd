@@ -16,6 +16,8 @@ interface IUser extends Document {
     isBlocked: boolean;
     isVerified: boolean;
     comparePassword(password: string): Promise<boolean>;
+    resetToken?: string;
+    resetTokenExpiry?: Date;
     createdAt: Date;
 }
 
@@ -33,6 +35,8 @@ const UserSchema: Schema = new Schema<IUser>({
     isAdmin: { type: Boolean, default: false },
     isBlocked: { type: Boolean, default: false },
     isVerified: { type: Boolean, default: false },
+    resetToken: { type: String },
+    resetTokenExpiry: { type: Date },
     createdAt: { type: Date, default: Date.now }
 });
 

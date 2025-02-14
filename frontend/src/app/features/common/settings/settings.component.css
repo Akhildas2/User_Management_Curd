@@ -9,7 +9,7 @@ app-header {
   width: 100%;
   height: calc(100vh - 80px);
   display: flex;
-  padding: 40px;
+  padding: 30px;
 }
 
 /* Settings Card */
