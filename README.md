@@ -14,7 +14,7 @@ A comprehensive User Management application built with **Angular** for the front
 - [Directory Structure](#directory-structure)
 - [API Endpoints](#api-endpoints)
 - [Contributing](#contributing)
-
+- [Contact](#contact)
 ---
 
 ## Features
@@ -184,3 +184,12 @@ git push origin feature-name
 
 5. Open a Pull Request.
 
+## Contact
+
+For questions, suggestions, or feedback, please reach out:
+
+- **Author:** akhildas.p
+- **GitHub:** [Akhildas2](https://github.com/Akhildas2)
+- **Email:** akhildasaki12@gmail.com
+
+Happy coding and thank you for exploring.
