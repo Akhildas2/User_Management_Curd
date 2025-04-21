@@ -172,30 +172,24 @@ export const toggleBlockUser = async (req: Request, res: Response): Promise<void
 // User verification
 export const userVerification = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { id: userId } = req.params;
-
-        if (!userId) {
-            res.status(400).json({ status: "error", message: "User ID is required." });
-            return;
-        }
-
+        const userId = req.params.id;
         const user = await User.findById(userId);
+
         if (!user) {
             res.status(404).json({ status: "error", message: "User not found." });
             return;
         }
 
-        if (user.isVerified) {
-            res.status(400).json({ status: "error", message: "User is already verified." });
-            return;
-        }
-
-        user.isVerified = true;
+        user.isVerified = !user.isVerified;
         await user.save();
 
-        res.status(200).json({ status: "success", message: "User verified successfully.", user });
+        res.status(200).json({
+            status: 'success',
+            message: user.isVerified ? 'User has been verified.' : 'User has been unverified.',
+            isVerified: user.isVerified
+        });
 
     } catch (error) {
-        res.status(500).json({ status: "error", message: "Failed to verify user", error: error });
+        res.status(500).json({ status: "error", message: "Failed to verify/unverify user", error: error });
     }
 };

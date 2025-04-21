@@ -26,7 +26,7 @@ import { FooterComponent } from '../../../shared/components/footer/footer.compon
   styleUrl: './users-management.component.css'
 })
 export class UsersManagementComponent implements OnInit {
-  displayedColumns: string[] = ['profileImage', 'name', 'email', 'phone', 'position', 'blockedStatus', 'actions'];
+  displayedColumns: string[] = ['profileImage', 'name', 'email', 'phone', 'position', 'status', 'actions'];
   dataSource = new MatTableDataSource<IUser>([]);
   isLoading$!: Observable<boolean>;
   error$!: Observable<string | null>;
@@ -161,12 +161,12 @@ export class UsersManagementComponent implements OnInit {
           return;
         }
         this.adminService.toggleBlockUser(user._id).subscribe(
-          (response: any) => {
+          (response: { message: string, isBlocked: boolean }) => {
             const updatedUser = { ...user, isBlocked: response.isBlocked };
-
             this.dataSource.data = this.dataSource.data.map(u =>
               u._id === updatedUser._id ? updatedUser : u
             );
+            
             const status = updatedUser.isBlocked ? 'blocked' : 'unblocked';
             this.notificationService.showNotification(`User successfully ${status}.`, 'success');
           },
@@ -182,28 +182,37 @@ export class UsersManagementComponent implements OnInit {
   verifyUser(user: IUser, event: Event): void {
     event.stopPropagation(); // Prevents row click event from opening the dialog
 
-    if (!user._id) {
-      this.notificationService.showNotification('User session expired. Please login again.');
-      return;
-    }
-
-    this.adminService.verifyUser(user._id).subscribe(
-      (response: { message: string, user: IUser }) => {
-        // Ensure response contains updated user data
-        if (response.user) {
-          this.dataSource.data = this.dataSource.data.map(u =>
-            u._id === user._id ? { ...u, isVerified: response.user.isVerified } : u
-          );
-          this.notificationService.showNotification(response.message);
-        } else {
-          this.notificationService.showNotification('Unexpected response from server.');
-        }
-      },
-      (error) => {
-        console.error('Error verifying user:', error);
-        this.notificationService.showNotification('Failed to verify user');
+    const action = user.isVerified ? 'unverify' : 'verify';
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        icon: 'warning',
+        title: `Confirm ${action.charAt(0).toUpperCase() + action.slice(1)}`,
+        message: `Are you sure you want to ${action} ${user.name}'s account?`
       }
-    );
-  }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (!user._id) {
+          this.notificationService.showNotification('User session expired. Please login again.');
+          return;
+        }
+
+        this.adminService.verifyUser(user._id).subscribe(
+          (response: { message: string, isVerified: boolean }) => {
+            const updatedUser = { ...user, isVerified: response.isVerified };
+            this.dataSource.data = this.dataSource.data.map(u =>
+              u._id === updatedUser._id ? updatedUser : u
+            );
+  
+            const status = updatedUser.isVerified ? 'verified' : 'unverified';
+            this.notificationService.showNotification(`User successfully ${status}.`, 'success');
+          },
+          () => {
+            this.notificationService.showNotification('Failed to update verify user');
+          }
+        );
+      }
+    });
+  }
 }

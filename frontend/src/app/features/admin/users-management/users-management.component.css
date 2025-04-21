@@ -195,83 +195,33 @@ button.mat-icon-button:hover {
     .hide-on-mobile {
         display: none;
     }
-}
 
-@media screen and (max-width: 480px) {
-    .user-list-container {
-        padding: 0;
-        margin: 0;
-        width: 100%;
-        overflow-x: hidden;
+    .mat-header-cell,
+    .mat-cell {
+        padding: 6px 8px !important;
+        font-size: 0.75rem;
     }
 
-    .user-list-card {
-        padding: 5px;
-        margin: 0;
-        width: 100%;
-    }
-
-    .heading {
-        font-size: 1.2rem;
-        margin-top: 20px;
-
-    }
-
-    .add-user-button {
-        margin-top: 20px;
-        font-size: 10px;
-        padding: 4px 8px;
-        margin-right: 15px;
-    }
-
-    .table-container {
+    .mat-table {
         width: 100%;
         overflow-x: auto;
+        display: block;
     }
 
     table.mat-elevation-z8 {
-        display: block;
-        width: 100%;
+        table-layout: auto;
         overflow-x: auto;
-        border-collapse: collapse;
+        display: block;
     }
 
-    table.mat-elevation-z8 th,
-    table.mat-elevation-z8 td {
-        font-size: 0.8rem;
-        padding: 3px;
-        text-align: left;
+    td.mat-cell span,
+    td.mat-cell {
         white-space: nowrap;
-    }
-
-    .action-buttons {
-        display: flex;
-        align-items: center;
-        gap: 2px;
-    }
-
-    button.mat-icon-button {
-        width: 45px;
-        height: 45px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .mat-icon {
-        font-size: 16px;
-        height: 25px;
-        width: 25px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    /* Profile Image */
-    .profile-img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        margin: 2px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 120px;
+        display: inline-block;
     }
 }
+
+

@@ -90,6 +90,10 @@ app-header {
   border-radius: 16px;
 }
 
+.info-deatils{
+  width: 100%;
+}
+
 .profile-title {
   display: flex;
   align-items: center;
@@ -199,7 +203,7 @@ mat-panel-description {
 .delete-account-btn {
   display: block;
   width: 45%;
-  margin: 15px auto;
+  margin: 40px auto;
   text-align: center;
   color: #00adbd;
   border: 1px solid #00adbd;

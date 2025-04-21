@@ -1,6 +1,6 @@
-# User Management System
+# CRUDify – A simple, responsive user management system.
 
-A comprehensive User Management application built with **Angular** for the frontend and **Node.js**, **Express.js**, **MongoDB**, and **TypeScript** for the backend. This application enables Create, Read, Update, and Delete (CRUD) operations for managing users.
+A fully‑responsive User Management System (“CRUDify”) with **Admin** and **User** roles, built with **Angular** (Frontend) and **Node.js**, **Express.js**, **MongoDB**, **TypeScript** (Backend). Includes advanced features like JWT authentication, Nodemailer integration, and Cloudinary image management.
 
 ## Table of Contents
 
@@ -9,21 +9,46 @@ A comprehensive User Management application built with **Angular** for the front
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+  - [Environment Setup](#environment-setup)
   - [Running the Application](#running-the-application)
-- [Scripts](#scripts)
-- [Directory Structure](#directory-structure)
-- [API Endpoints](#api-endpoints)
+- [Project Structure](#project-structure)
+- [API Reference](#api-reference)
 - [Contributing](#contributing)
+- [License](#license)
 - [Contact](#contact)
+
 ---
 
 ## Features
 
-- User CRUD operations (Create, Read, Update, Delete).
-- Fully responsive frontend built with **Angular**.
-- Secure backend using **Node.js** and **Express.js**.
-- Persistent data storage with **MongoDB**.
-- Written in **TypeScript** for type safety.
+### Admin Features
+
+- **User Management**: Add/Edit/Delete users with role-based access
+- **Verification System**: Verify/Unverify users
+- **Access Control**: Block/Unblock users accounts
+- **Dashboard**: Visualize user statistics and activity insights using dynamic charts
+- **Advanced Search**: Filter users by status/role
+
+### User Features
+
+- **Authentication**:
+  - Register with email verification
+  - Login/Logout
+  - Forgot Password & Reset via Email
+- **Profile Management**:
+  - Add/Edit/Delete personal details
+  - Upload profile images (Cloudinary integration)
+- **Settings**:
+  - Change password securely
+  - Contact support form for assistance
+  - Access to Help Center / FAQ section
+
+### Common Features
+
+- JWT-based Authentication
+- Fully Responsive Design
+- Email Notifications (Nodemailer)
+- Type Safety with TypeScript
 
 ---
 
@@ -33,6 +58,8 @@ A comprehensive User Management application built with **Angular** for the front
 
 - **Angular CLI**: Version 18.2.1
 - **TypeScript**
+- **RxJS**
+- **Angular Material**
 
 ### Backend
 
@@ -40,6 +67,10 @@ A comprehensive User Management application built with **Angular** for the front
 - **Express.js**
 - **MongoDB**
 - **TypeScript**
+- **JWT Authentication**
+- **Nodemailer**
+- **Bcrypt**
+- **Cloudinary API**
 
 ---
 
@@ -56,22 +87,56 @@ A comprehensive User Management application built with **Angular** for the front
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/Akhildas2/User_Management_Curd_App.git
-cd user-management
+https://github.com/Akhildas2/crudify.git
+cd crudify
 ```
 
-2. Install dependencies for the frontend:
+2. Install dependencies
+
+- frontend:
 
 ```bash
 cd frontend
 npm install
 ```
 
-3. Install dependencies for the backend:
+- backend:
 
 ```bash
 cd ../backend
 npm install
+```
+
+### Environment Setup
+
+- Create `.env` file in `/backend`:
+
+```bash
+PORT =<your-port>
+CLIENT_URL =<your-client-url>
+CLOUDINARY_CLOUD_NAME=<cloud-name>
+CLOUDINARY_API_KEY=<api-key>
+CLOUDINARY_API_SECRET=<api-secret>
+MONGO_URI=<your-mongo-connection-string>
+JWT_SECRET=<your-jwt-secret>
+REFRESH_TOKEN_SECRET=<your-refresh-token>
+ACCESS_TOKEN_SECRET=<your-access-token>
+SMTP_HOST=<smtp-host>
+SMTP_PORT=<smtp-port>
+SMTP_USER=<smtp-username>
+SMTP_PASS=<smtp-password>
+SMTP_FROM=<smtp-from>
+```
+
+- Angular also supports environment files under client/src/environments/
+
+```bash
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:<Port>',
+  userApiUrl: 'http://localhost:<Port>/api/user',
+  adminApiUrl: 'http://localhost:<Port>/api/admin'
+};
 ```
 
 ### Running the Application
@@ -106,56 +171,104 @@ ng serve
 npm run dev
 ```
 
-3. The backend will run on: http://localhost:3000
+3. The backend will run on: http://localhost:3333
 
 ---
 
-## Scripts
-
-### Frontend
-
-- Development Server: ng serve
-- Build: ng build
-- Generate Component: ng generate component component-name
-
-### Backend
-
-- Start Server: npm run dev
-
----
-
-## Directory Structure
+## Project Structure
 
 ```bash
-user-management/
-├── frontend/
+crudify/
+├── frontend/                             # Angular Frontend
 │   ├── src/
+│   │   ├── app/
+│   │   │   ├── core/                     # Route guards, interceptors, core services
+│   │   │   │   ├── guards/
+│   │   │   │   ├── interceptors/
+│   │   │   │   └── services/
+│   │   │   ├── features/                 # Feature modules
+│   │   │   │   ├── admin/
+│   │   │   │   ├── auth/
+│   │   │   │   ├── common/
+│   │   │   │   └── user/
+│   │   │   ├── shared/                   # Reusable components, models, services, validators
+│   │   │   │   ├── components/
+│   │   │   │   ├── models/
+│   │   │   │   ├── services/
+│   │   │   │   └── validators/
+│   │   │   └── store/                    # State management using NgRx
+│   │   │       ├── actions/
+│   │   │       ├── effects/
+│   │   │       ├── reducers/
+│   │   │       ├── selectors/
+│   │   │       └── state/
+│   │   ├── environments/
+│   │   ├── app.module.ts
+│   │   └── material.module.ts           # Angular Material components
+│   ├── index.html
 │   ├── angular.json
-│   ├── package.json
-│   └── tsconfig.json
-├── backend/
+│   └── package.json
+
+├── backend/                              # Node.js + Express Backend
 │   ├── src/
-│   │   ├── controllers/
-│   │   ├── models/
-│   │   ├── routes/
-│   │   ├── app.ts
-│   │   └── server.ts
+│   │   ├── config/                       # App config & DB connection
+│   │   ├── controllers/                  # Request handlers
+│   │   ├── helpers/                      # Utility functions (email, Cloudinary, etc.)
+│   │   ├── interfaces/                   # TypeScript interfaces & types
+│   │   ├── middlewares/                 # Authentication, error handlers
+│   │   ├── routes/                       # Route definitions
+│   │   ├── services/                     # Business logic
+│   │   └── server.ts                     # App entry point
+│   ├── .env                              # Environment variables
+│   ├── tsconfig.json
 │   ├── package.json
-│   └── tsconfig.json
-└── README.md
----
+│   └── package-lock.json
 
 ```
 
-## API Endpoints
+## API Reference
 
-Base URL: `http://localhost:3000/api`
+All endpoints are prefixed with:  
+`/api`
 
-- **GET /api/users**: List all users
-- **GET /api/users/:id**: Get user by ID
-- **POST /api/users**: Create new user
-- **PUT /api/users/:id**: Update existing user
-- **DELETE /api/users/:id**: Delete user
+---
+
+### 🔐 Auth Routes
+
+| Method | Endpoint           | Description                |
+| ------ | ------------------ | -------------------------- |
+| POST   | `/register`        | Register a new user        |
+| POST   | `/login`           | User login                 |
+| POST   | `/logout`          | Logout current user        |
+| POST   | `/refresh-token`   | Refresh JWT access token   |
+| POST   | `/forgot-password` | Send password reset email  |
+| POST   | `/reset-password`  | Reset password using token |
+
+---
+
+### 👤 User Routes
+
+| Method | Endpoint                   | Description                       |
+| ------ | -------------------------- | --------------------------------- |
+| GET    | `/user/:id`                | Get user by ID                    |
+| PUT    | `/user`                    | Update user data                  |
+| DELETE | `/user/:id`                | Delete user                       |
+| POST   | `/user/upload-photo`       | Upload profile photo (Cloudinary) |
+| POST   | `/user/:id/changePassword` | Change user password              |
+
+---
+
+### 🛠 Admin Routes
+
+| Method | Endpoint                 | Description                               |
+| ------ | ------------------------ | ----------------------------------------- |
+| GET    | `/admin/users`           | Get list of all users                     |
+| GET    | `/admin/user/:id`        | Get a specific user by ID                 |
+| POST   | `/admin/user`            | Create a new user (supports image upload) |
+| PUT    | `/admin/user`            | Update existing user (supports image)     |
+| DELETE | `/admin/user/:id`        | Delete a user by ID                       |
+| PATCH  | `/admin/user/:id`        | Block or Unblock a user                   |
+| PATCH  | `/admin/user/verify/:id` | Verify or Unverify a user                 |
 
 ---
 
@@ -184,6 +297,10 @@ git push origin feature-name
 
 5. Open a Pull Request.
 
+## License
+
+Distributed under the MIT License. See [LICENSE](./LICENSE) for more information.
+
 ## Contact
 
 For questions, suggestions, or feedback, please reach out:
@@ -192,4 +309,4 @@ For questions, suggestions, or feedback, please reach out:
 - **GitHub:** [Akhildas2](https://github.com/Akhildas2)
 - **Email:** akhildasaki12@gmail.com
 
-Happy coding and thank you for exploring.
+  Happy coding with CRUDify! and thank you for exploring.

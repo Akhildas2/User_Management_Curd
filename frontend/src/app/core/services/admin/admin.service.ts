@@ -34,12 +34,12 @@ export class AdminService {
     return this.http.delete<void>(`${this.baseUrl}/user/${id}`)
   }
 
-  toggleBlockUser(id: string): Observable<void> {
-    return this.http.patch<void>(`${this.baseUrl}/user/${id}`, {})
+  toggleBlockUser(id: string): Observable<{ message: string, isBlocked: boolean }> {
+    return this.http.patch<{ message: string, isBlocked: boolean }>(`${this.baseUrl}/user/${id}`, {})
   }
 
-  verifyUser(id: string): Observable<{ message: string, user: IUser }> {
-    return this.http.patch<{ message: string, user: IUser }>(`${this.baseUrl}/user/verify/${id}`, {})
+  verifyUser(id: string): Observable<{ message: string, isVerified: boolean }> {
+    return this.http.patch<{ message: string, isVerified: boolean }>(`${this.baseUrl}/user/verify/${id}`, {})
   }
 
 }
