@@ -54,31 +54,12 @@
               <mat-error *ngIf="changePasswordForm.get('confirmPassword')?.hasError('passwordMismatch')">
                 Passwords do not match.
               </mat-error>
-
-
             </mat-form-field>
 
-
-
-            <button mat-raised-button color="primary" [disabled]="changePasswordForm.invalid">
+            <button mat-raised-button class="buttons" [disabled]="changePasswordForm.invalid">
               Update Password
             </button>
           </form>
-        </div>
-      </mat-tab>
-
-
-      <!-- Change Theme -->
-      <mat-tab label="Change Theme">
-        <div class="tab-content">
-          <h3 class="title">Select Theme</h3>
-
-          <mat-radio-group [value]="theme()" (change)="changeTheme($event.value)" aria-label="Select Theme">
-            <mat-radio-button value="light">Light Mode</mat-radio-button>
-            <mat-radio-button value="dark">Dark Mode</mat-radio-button>
-          </mat-radio-group>
-
-          <button mat-button class="buttons" (click)="changeTheme(theme())">Save Theme</button>
         </div>
       </mat-tab>
 

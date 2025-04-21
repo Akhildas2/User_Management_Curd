@@ -35,6 +35,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   additionalDetailsAvailable = false;
   previewImage: string | ArrayBuffer | null | undefined = null;
   selectedFile: File | null = null;
+  isUploading: boolean = false;
   private destroy$ = new Subject<void>();
 
   positions: { position: string, icon: string }[] = [
@@ -77,8 +78,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.detailsForm.patchValue({ dob: user.dob, gender: user.gender || 'Male', skills: user.skills, position: user.position });
         this.editableUser = { ...user };
         this.additionalDetailsAvailable = !!user.dob;
+        if (this.isUploading) {
+          setTimeout(() => {
+            this.isUploading = false;
+          }, 1000);
+        }
       }
     });
+
+    this.error$.pipe(takeUntil(this.destroy$)).subscribe((error) => {
+      if (error) {
+        if (this.isUploading) {
+          this.isUploading = false;
+        }
+      }
+    })
   }
 
   toggleEditMode(): void {
@@ -161,6 +175,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   uploadPhoto(): void {
     if (this.selectedFile) {
+      this.isUploading = true;
       const formData = new FormData();
       formData.append('profileImage', this.selectedFile);
       this.user$.pipe(take(1)).subscribe(user => {

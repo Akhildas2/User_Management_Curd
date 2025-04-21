@@ -20,8 +20,6 @@ export class SettingsComponent {
   hideCurrent = signal(true);
   hideNew = signal(true);
   hideConfirm = signal(true);
-  theme: WritableSignal<string> = signal(localStorage.getItem('theme') || 'light');
-
 
   constructor(
     private fb: FormBuilder,
@@ -34,9 +32,6 @@ export class SettingsComponent {
       newPassword: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required, this.matchPasswordValidator()]]
     });
-
-    this.applyTheme(this.theme());
-    effect(() => this.applyTheme(this.theme()));
   }
 
 
@@ -107,15 +102,5 @@ export class SettingsComponent {
     )
 
   }
-  changeTheme(theme: string) {
-    this.theme.set(theme);
-    localStorage.setItem('theme', theme);
-  }
-
-  applyTheme(theme: string) {
-    document.body.classList.remove('light', 'dark'); // Remove old theme
-    document.body.classList.add(theme);
-  }
-
 
 }

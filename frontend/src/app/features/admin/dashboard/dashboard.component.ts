@@ -8,11 +8,12 @@ import { Store } from '@ngrx/store';
 import { selectAllUsers } from '../../../store/selectors/admin.selectors';
 import { IUser } from '../../../shared/models/userModel';
 import { FooterComponent } from '../../../shared/components/footer/footer.component';
+import { Color, ScaleType, NgxChartsModule } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, MaterialModule, CommonModule],
+  imports: [HeaderComponent, FooterComponent, MaterialModule, CommonModule, NgxChartsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
@@ -21,6 +22,23 @@ export class DashboardComponent {
   blockedUser = 0;
   verifiedUser = 0;
   activeUser = 0;
+  chartData: any[] = [];
+  colorScheme: Color = {
+    name: 'customScheme',
+    selectable: true,
+    group: ScaleType.Ordinal,
+    domain: ['#00adbd']
+  };
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Metrics';
+  showYAxisLabel = true;
+  yAxisLabel = 'Count';
+  autoScale = true;
+  timeline = true;
 
   metrics = [
     { title: 'Total Users', value: 0, icon: 'people', color: '#004d63' },
@@ -48,6 +66,17 @@ export class DashboardComponent {
         { title: 'Active Users', value: this.activeUser, icon: 'person', color: '#00adbd' },
         { title: 'Blocked Users', value: this.blockedUser, icon: 'block', color: '#FF0000' },
         { title: 'Verified Users', value: this.verifiedUser, icon: 'verified', color: '#4CAF50' },
+      ];
+      this.chartData = [
+        {
+          name: 'User Metrics',
+          series: [
+            { name: 'Total Users', value: this.totalUser },
+            { name: 'Active Users', value: this.activeUser },
+            { name: 'Blocked Users', value: this.blockedUser },
+            { name: 'Verified Users', value: this.verifiedUser }
+          ]
+        }
       ];
     });
   }

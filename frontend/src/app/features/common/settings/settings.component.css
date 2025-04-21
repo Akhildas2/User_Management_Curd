@@ -16,8 +16,8 @@ app-header {
 .settings-card {
   width: 100%;
   background: white;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
   padding: 20px;
   z-index: 0;
 }
